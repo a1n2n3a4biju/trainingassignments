@@ -1,0 +1,217 @@
+-- CREATE TABLE customers ( 
+--     customer_id INT PRIMARY KEY,
+--     customer_name VARCHAR(100), 
+--     city VARCHAR(50)
+-- );
+-- INSERT INTO customers VALUES (1, 'Aarav Menon', 'Kochi'), (2, 'Diya Kapoor', 'Jaipur'),
+-- (3, 'Naveen Iyer', 'Coimbatore'), (4, 'Saira Mirza', 'Bhopal'),
+-- (5, 'Harish Babu', 'Vijayawada'), (6, 'Rhea Dutta', 'Guwahati');
+
+-- CREATE TABLE vehicles ( 
+--     vehicle_id INT PRIMARY KEY,
+--     customer_id INT,
+--     model_name VARCHAR(100), 
+--     battery_capacity INT, 
+--     registration_no VARCHAR(20),
+-- 	    FOREIGN KEY (customer_id)
+--         REFERENCES customers(customer_id)
+-- );
+-- INSERT INTO vehicles VALUES
+-- (101, 1, 'Volt X1', 60, 'KL07EV101'), (102, 2, 'EcoDrive S', 45, 'RJ14EV202'), (103, 3, 'Urban E3', 50, 'TN38EV303'), (104, 4, 'Volt X1', 60, 'MP04EV404'), (105, 5, 'E-Motion Pro', 75, 'AP16EV505');
+
+-- CREATE TABLE technicians ( 
+--     technician_id INT PRIMARY KEY,
+--     technician_name VARCHAR(100), 
+--     specialization VARCHAR(50)
+-- );
+
+-- INSERT INTO technicians VALUES
+-- (201, 'Manoj Pillai', 'Battery'),
+-- (202, 'Irfan Qureshi', 'Electrical'),
+-- (203, 'Sneha Kulkarni', 'General Service'), (204, 'Joseph Thomas', 'Diagnostics');
+
+-- CREATE TABLE service_bookings ( 
+--     booking_id INT PRIMARY KEY, 
+--     vehicle_id INT,
+--     technician_id INT, 
+--     service_date DATE, 
+--     service_status VARCHAR(30),
+-- 	FOREIGN KEY (vehicle_id)
+-- 	REFERENCES vehicles(vehicle_id),
+-- 	FOREIGN KEY (technician_id)
+-- 	REFERENCES technicians(technician_id)
+-- );
+
+-- INSERT INTO service_bookings VALUES
+-- (1001, 101, 201, '2026-10-01', 'Completed'), (1002, 102, 202, '2026-10-02', 'Completed'), (1003, 103, 203, '2026-10-04', 'In Progress'), (1004, 104, 204, '2026-10-05', 'Scheduled'), (1005, 101, 203, '2026-10-07', 'Scheduled');
+
+-- CREATE TABLE service_items ( 
+--     service_item_id INT PRIMARY KEY,
+--     booking_id INT, 
+--     service_name VARCHAR(100), 
+--     cost DECIMAL(10,2),
+-- 	    FOREIGN KEY (booking_id)
+--         REFERENCES service_bookings(booking_id)
+-- );
+
+-- INSERT INTO service_items VALUES
+-- (1, 1001, 'Battery Inspection', 1800), 
+-- (2, 1001, 'Software Update', 900),
+-- (3, 1002, 'Charging Port Repair', 2500), 
+-- (4, 1003, 'Brake Inspection', 1200),
+-- (5, 1003, 'Wheel Alignment', 1500),
+-- (6, 1004, 'Diagnostic Scan', 1000),
+-- (7, 1005, 'General Service', 2200);
+
+-- SELECT * FROM VEHICLES;
+-- SELECT * FROM  service_bookings WHERE service_status='Scheduled';
+-- SELECT * FROM service_items WHERE cost >1500;
+-- SELECT * FROM technicians WHERE specialization IN ('Battery' , 'Electrical');
+-- SELECT c.customer_name,COUNT(v.vehicle_id) AS own 
+-- FROM customers c LEFT JOIN vehicles v
+-- on c.customer_id=v.customer_id
+-- GROUP BY customer_name;
+-- SELECT AVG(cost) FROM service_items;
+
+-- SELECT c.customer_name,v.model_name,v.registration_no FROM customers c JOIN vehicles v ON c.customer_id=v.customer_id;
+
+-- SELECT v.vehicle_id,v.model_name,sb.service_date,sb.service_status FROM vehicles v JOIN service_bookings sb ON v.vehicle_id=sb.vehicle_id;
+-- SELECT sb.booking_id,t.technician_name,t.specialization,sb.service_status FROM service_bookings sb JOIN 
+-- technicians t ON sb.technician_id=t.technician_id;
+
+-- SELECT c.customer_name,v.model_name,t.technician_name,sb.service_date,sb.service_status
+-- FROM customers c
+-- JOIN vehicles v
+-- ON c.customer_id=v.customer_id
+-- JOIN service_bookings sb
+-- ON v.vehicle_id=sb.vehicle_id
+-- JOIN technicians t
+-- ON sb.technician_id=t.technician_id;
+
+-- SELECT sb.booking_id,SUM(s.cost) 
+-- FROM service_bookings sb 
+-- JOIN service_items s
+-- ON sb.booking_id=s.booking_id
+-- GROUP BY sb.booking_id;
+
+-- SELECT c.customer_id,c.customer_name,v.model_name,sb.booking_id
+-- FROM customers c
+-- LEFT JOIN vehicles v
+-- ON c.customer_id=v.customer_id
+-- LEFT JOIN service_bookings sb
+-- ON v.vehicle_id=sb.vehicle_id;
+
+-- CREATE VIEW service_booking_summary AS
+-- SELECT sb.booking_id,c.customer_name,v.model_name,t.technician_name,sb.service_date,sb.service_status
+-- FROM customers c
+-- JOIN vehicles v
+-- ON c.customer_id=v.customer_id
+-- JOIN service_bookings sb
+-- ON v.vehicle_id=sb.vehicle_id
+-- JOIN technicians t
+-- ON sb.technician_id=t.technician_id;
+
+
+-- SELECT  * FROM service_booking_summary WHERE service_status='Completed';
+
+-- CREATE VIEW service_cost_summary AS
+-- SELECT sb.booking_id,c.customer_name,SUM(s.cost) AS total_service_cost
+-- FROM customers c
+-- JOIN vehicles v
+-- ON c.customer_id=v.customer_id
+-- JOIN service_bookings sb
+-- ON v.vehicle_id=sb.vehicle_id
+-- JOIN service_items s
+-- ON sb.booking_id=s.booking_id
+-- GROUP BY sb.booking_id,c.customer_name;
+
+-- SELECT * FROM service_cost_summary;
+
+-- CREATE OR REPLACE FUNCTION calculate_service_discount
+-- (cost DECIMAL)
+-- RETURNS DECIMAL
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- 	IF cost>=2500 THEN
+-- 		RETURN cost *0.10;
+-- 	ELSE
+-- 		RETURN 0;
+-- 	END IF;
+-- END;
+-- $$;
+
+
+-- CREATE OR REPLACE FUNCTION calculate_final_cost(cost DECIMAL)
+-- RETURNS DECIMAL
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- 	RETURN cost-calculate_service_discount(cost);
+-- END;
+-- $$;
+
+-- SELECT calculate_final_cost(2000);
+
+-- CREATE OR REPLACE PROCEDURE update_service_status(
+-- 	p_booking_id INT,
+-- 	p_new_status VARCHAR)
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- 	UPDATE service_bookings
+-- 	set service_status=p_new_status
+-- 	WHERE booking_id=p_booking_id;
+-- END;
+-- $$;
+
+-- CALL update_service_status(1004,'C')
+
+-- CREATE OR REPLACE PROCEDURE complete_old_services()
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- UPDATE  service_bookings
+-- SET service_status='Completed'
+-- WHERE service_status='In Progress';
+-- END;
+-- $$;
+
+-- -- CALL complete_old_services()
+
+-- SELECT * FROM  service_bookings WHERE service_status='Completed';
+
+
+CREATE OR REPLACE PROCEDURE assign_technician(
+p_booking_id INT,
+p_technician_id INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+UPDATE service_bookings
+set technician_id=p_technician_id
+WHERE booking_id=p_booking_id;
+END ;
+$$;
+
+CALL assign_technician(1003,204)
+
+-- CREATE OR REPLACE PROCEDURE increase_service_cost(p_percentage DECIMAL)
+-- LANGUAGE plpgsql
+-- AS $$
+-- BEGIN
+-- UPDATE service_items
+-- SET cost=cost+(p_percentage+cost)/100;
+-- END;
+-- $$;
+
+-- CALL increase_service_cost(10);
+
+ 
+-- SELECT * FROM service_items
+
+
+
+
+
