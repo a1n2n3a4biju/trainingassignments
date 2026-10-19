@@ -1,0 +1,12 @@
+
+
+Structured: urban_mobility.csv
+The files in tables represented in columns and rows are structured.It is in a rigid format
+
+semi-structured:equipment_events.json
+Most of the json files are semi-structured. They are cross-platform and API request and call is through this language.They use keys and tags
+
+unstructured:c
+Unstructured: coastal_monitoring_log.txt
+It doesn't have a fixed format and doesn't follow tabular schema.
+Images, text files and images belong to this category
