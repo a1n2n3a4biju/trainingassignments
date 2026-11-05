@@ -1,0 +1,15 @@
+
+[
+  {
+    "code": "SAVE10",
+    "discount": 10
+  },
+  {
+    "code": "WORKSHOP10",
+    "discount": 10
+  },
+  {
+    "code": "TRAIN10",
+    "discount": 10
+  }
+]
