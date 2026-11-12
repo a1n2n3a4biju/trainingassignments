@@ -1,8 +1,7 @@
-==========================================
+
 MICROSOFT AGENT FRAMEWORK
 IT INCIDENT ROUTING SYSTEM
 Authentication: Azure Foundry API Key
-============================================================
 
 Azure Foundry configuration loaded.
 Endpoint: https://annabiju-foundryms.openai.azure.com/openai/v1
@@ -16,7 +15,7 @@ Graph workflow built successfully.
 ============================================================
 Processing Incident: INC101
 Description: The corporate email service is unavailable for every employee across the company.
-============================================================
+
 
 [Triage Agent] Analyzing incident...
 [Triage Agent] Severity: HIGH
