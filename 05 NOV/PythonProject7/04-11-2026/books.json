@@ -1,0 +1,35 @@
+[
+
+{
+"id": 101,
+  "title": "Python Crash Course",
+  "author": "Eric Matthes",
+  "category": "Programming",
+  "available_copies": 3
+},
+
+  {"id": 102,
+  "title": "Data Analytics",
+  "author": "John Ben",
+  "category": "IT",
+  "available_copies": 2
+  },
+  {"id": 103,
+  "title": "Cloud Computing",
+  "author": "Tai Mue",
+  "category": "Deploy",
+  "available_copies": 4
+  },
+   {"id": 104,
+  "title": "React",
+  "author": "Sona Marwai",
+  "category": "Programming",
+  "available_copies": 3
+  },
+   {"id": 105,
+  "title": "FASTAPI",
+  "author": "Jaffer Salim",
+  "category": "API",
+  "available_copies": 2
+  }
+]

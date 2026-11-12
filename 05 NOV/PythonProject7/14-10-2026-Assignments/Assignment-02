@@ -1,0 +1,180 @@
+-- SELECT * FROM c
+
+-- SELECT c.guest_name,c.city,c.hotel_name FROM c
+
+
+-- SELECT c.guest_name,c.room_type,c.nights,c.booking_amount FROM c
+
+
+-- SELECT c.id,c.guest_name,c.booking_status FROM c
+
+-- SELECT * FROM c WHERE c.city='Hyderabad'
+
+-- SELECT * FROM c WHERE c.city='Mumbai'
+
+-- SELECT * FROM c WHERE c.booking_status='Completed'
+
+-- SELECT * FROM c WHERE c.room_type='Suite'
+
+-- SELECT * FROM c WHERE c.room_type='Executive'
+
+-- SELECT * FROM c WHERE c.booking_amount>20000
+
+-- SELECT * FROM c WHERE c.room_rate>6000
+
+-- SELECT * FROM c WHERE c.nights>3
+
+-- SELECT * FROM c WHERE c.rating<4.2
+
+-- SELECT * FROM c WHERE c.booking_amount BETWEEN 8000 and 25000
+
+-- SELECT * FROM c WHERE c.room_rate<4000
+
+-- SELECT * FROM c WHERE c.booking_status='Confirmed' and c.booking_amount>15000
+
+-- SELECT * FROM c WHERE c.city='Mumbai' and c.room_type='Suite'
+
+-- SELECT * FROM c WHERE c.nights>2 and c.rating>4.5
+
+-- SELECT * FROM c WHERE c.booking_status='Completed' and c.booking_amount>10000
+
+-- SELECT * FROM c WHERE c.room_type='Standard' and c.room_rate<3500
+
+-- SELECT * FROM c WHERE c.city='Hyderabad' or c.city='Bengaluru'
+
+-- SELECT * FROM c WHERE c.city='Mumbai' or c.city='Delhi'
+
+-- SELECT * FROM c WHERE c.room_type='Suite' or c.room_type='Executive'
+
+-- SELECT * FROM c WHERE c.booking_status='Completed' or c.booking_status='Confirmed'
+
+-- SELECT * FROM c WHERE c.city='Chennai' or c.city='Pune' or c.city='Kochi'
+
+-- SELECT * FROM c 
+-- ORDER BY c.booking_amount
+
+-- SELECT * FROM c 
+-- ORDER BY c.booking_amount DESC
+
+-- SELECT * FROM c 
+-- ORDER BY c.rating DESC
+
+-- SELECT * FROM c 
+-- ORDER BY c.nights DESC
+
+-- SELECT * FROM c 
+-- ORDER BY c.city ASC, c.booking_amount DESC
+
+-- SELECT COUNT(c.id) FROM c
+
+-- SELECT COUNT(c.id) FROM c WHERE c.booking_status='Confirmed'
+
+-- SELECT COUNT(c.id) FROM c WHERE c.booking_status='Completed'
+
+-- SELECT COUNT(c.id) FROM c WHERE c.room_type='Suite'
+
+-- SELECT COUNT(c.id) FROM c WHERE c.city='Pune'
+
+-- SELECT c.city,COUNT(c.id) FROM c 
+-- GROUP BY c.city
+
+-- SELECT c.room_type,COUNT(c.id) FROM c 
+-- GROUP BY c.room_type
+
+-- SELECT c.booking_status,COUNT(c.id) FROM c 
+-- GROUP BY c.booking_status
+
+-- SELECT c.city,SUM(c.booking_amount) FROM c 
+-- GROUP BY c.city
+
+-- SELECT c.room_type,AVG(c.booking_amount) FROM c 
+-- GROUP BY c.room_type
+
+-- SELECT c.city,AVG(c.rating) FROM c 
+-- GROUP BY c.city
+
+-- SELECT c.city,SUM(c.nights) FROM c 
+-- GROUP BY c.city
+
+-- SELECT c.room_type,AVG(c.room_rate) FROM c 
+-- GROUP BY c.room_type
+
+-- SELECT c.city,SUM(c.booking_amount) FROM c 
+-- WHERE c.booking_status='Confirmed'
+-- GROUP BY c.city
+
+-- SELECT c.city,COUNT(c.id) FROM c 
+-- WHERE c.booking_status='Completed'
+-- GROUP BY c.city
+
+-- SELECT c.city,AVG(c.booking_amount) FROM c 
+-- WHERE c.booking_amount>8000
+-- GROUP BY c.city
+
+-- SELECT c.room_type,SUM(c.nights) FROM c 
+-- GROUP BY c.room_type
+
+-- SELECT TOP 5 c.booking_amount,c.id FROM c
+-- ORDER BY c.booking_amount DESC
+
+-- SELECT TOP 3 c.rating,c.id FROM c
+-- ORDER BY c.rating DESC
+
+-- SELECT c.booking_amount,c.id FROM c
+-- WHERE c.booking_status='Confirmed' and c.room_type='Suite'
+-- ORDER BY c.booking_amount DESC
+
+-- SELECT c.booking_amount,c.rating,c.id FROM c
+-- WHERE c.booking_amount>15000 and c.rating>4.5
+-- ORDER BY c.booking_amount DESC
+
+-- SELECT c.city,c.nights FROM c 
+-- WHERE (c.city='Hyderabad' or c.city='Bengaluru')
+-- and c.nights>2
+
+
+-- SELECT *  FROM c 
+-- WHERE c.booking_status='Cancelled'
+-- ORDER BY c.rating
+
+-- SELECT c.guest_name,c.city,c.hotel_name,c.booking_amount,c.rating FROM c
+-- WHERE c.booking_amount>20000
+
+-- SELECT  * FROM c
+-- WHERE c.room_rate>=6000 and c.room_type='Executive'
+-- ORDER BY c.room_rate DESC
+
+-- SELECT c.city,SUM(c.booking_amount) FROM c
+-- GROUP BY c.city
+
+-- SELECT TOP 1 c.booking_amount,c.id FROM c
+-- ORDER BY c.booking_amount DESC
+
+-- SELECT TOP 1 c.rating,c.id FROM c
+-- ORDER BY c.rating DESC
+
+-- SELECT AVG(c.booking_amount),c.room_type FROM c
+-- GROUP BY  c.room_type
+
+-- SELECT  SUM(c.nights),c.city FROM c
+-- GROUP BY  c.city
+
+-- SELECT COUNT(c.id) FROM c
+-- WHERE c.booking_status='Cancelled'
+
+-- SELECT  c.city,COUNT(c.booking_status) FROM c
+-- WHERE c.booking_status='Completed'
+-- GROUP BY c.city
+
+
+-- SELECT  c.hotel_name,SUM(c.booking_amount) FROM c
+-- GROUP BY c.hotel_name
+
+-- SELECT  c.room_type,AVG(c.room_rate) FROM c
+-- GROUP BY c.room_type
+
+SELECT  c.id,SUM(c.booking_amount) FROM c
+WHERE c.booking_status='Confirmed'
+GROUP BY c.id
+
+
