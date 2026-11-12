@@ -1,0 +1,22 @@
+[
+    {
+        "id": 103,
+        "Customer_name": "Anna Biju",
+        "title": "Deep Learning",
+        "author": "Ian Goodfellow"
+    },
+    {
+        "reservation_id": "RES-532532B0",
+        "book_id": 101,
+        "customer_name": "Anna Biju",
+        "title": "Python Crash Course",
+        "author": "Eric Matthes"
+    },
+    {
+        "reservation_id": "RES-90CE886C",
+        "book_id": 103,
+        "customer_name": "Anna Biju",
+        "title": "Deep Learning",
+        "author": "Ian Goodfellow"
+    }
+]
