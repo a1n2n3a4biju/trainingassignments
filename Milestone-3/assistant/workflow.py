@@ -8,14 +8,14 @@ from tools.weather_tools import weather_forecast_tool
 from assistant.memory import save_message, get_chat_history
 
 
-# PART 1: Connect to the LLM
+
 llm = ChatOllama(
     model="qwen2.5:3b",
     temperature=0
 )
 
 
-# PART 2: Create the prompt
+
 prompt = ChatPromptTemplate.from_template("""
 You are an AI Travel and Weather Advisory Assistant.
 
@@ -39,11 +39,11 @@ Do not invent weather information.
 """)
 
 
-# PART 3: Connect prompt and LLM
+
 advisory_chain = prompt | llm
 
 
-# PART 4: Generate travel advisory
+
 def generate_travel_advisory(trip_id, session_id, question):
 
     # Retrieve trip information
@@ -89,7 +89,7 @@ def generate_travel_advisory(trip_id, session_id, question):
     return answer
 
 
-# PART 5: Test the workflow
+
 if __name__ == "__main__":
 
     trip_id = 1
