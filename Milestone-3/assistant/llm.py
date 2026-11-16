@@ -3,14 +3,13 @@ from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 
 
-# STEP 1: Connect to Qwen
 llm = ChatOllama(
     model="qwen2.5:3b",
     temperature=0
 )
 
 
-# STEP 2: Create the prompt template
+
 prompt = ChatPromptTemplate.from_template("""
 You are an AI-powered business travel assistant.
 
@@ -34,11 +33,11 @@ Generate a short and simple travel advisory.
 """)
 
 
-# STEP 3: Connect prompt with AI model
+
 advisory_chain = prompt | llm
 
 
-# STEP 4: Test the chain
+
 if __name__ == "__main__":
 
     result = advisory_chain.invoke({
