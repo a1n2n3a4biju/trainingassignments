@@ -2,7 +2,7 @@
 import redis
 import json
 
-# Connect to Redis running in Docker
+
 r = redis.Redis(
     host="localhost",
     port=6379,
@@ -10,12 +10,11 @@ r = redis.Redis(
 )
 
 
-# Check Redis connection
 def check_redis():
     return r.ping()
 
 
-# Save a chat message
+
 def save_message(session_id, role, message):
     key = f"chat:{session_id}"
 
@@ -42,7 +41,7 @@ def get_chat_history(session_id):
     ]
 
 
-# Test the connection and memory
+
 if __name__ == "__main__":
 
     print("Redis connected:", check_redis())
